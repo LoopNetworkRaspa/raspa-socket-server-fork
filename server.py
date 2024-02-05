@@ -12,6 +12,8 @@ from starlette.responses import JSONResponse
 
 from kaspad.KaspadMultiClient import KaspadMultiClient
 
+NODE_RPC_URI = os.getenv("NODE_RPC_URI")
+
 sio = socketio.AsyncServer(async_mode="asgi", cors_allowed_origins=[])
 socket_app = socketio.ASGIApp(sio)
 
@@ -68,7 +70,7 @@ async def ping_server():
         raise HTTPException(status_code=500, detail="Kaspad not connected.")
 
 
-kaspad_hosts = []
+kaspad_hosts = [NODE_RPC_URI]
 
 for i in range(100):
     try:
