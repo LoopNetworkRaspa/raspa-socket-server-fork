@@ -22,16 +22,16 @@ RUN apk --no-cache add \
 RUN pip install \
   pipenv
 
-RUN addgroup -S -g 55747 api \
-  && adduser -h /app -S -D -g '' -G api -u 55747 api 
+# RUN addgroup -S -g 55747 api \
+#   && adduser -h /app -S -D -g '' -G api -u 55747 api 
 
 WORKDIR /app
-USER api
+# USER api
 
-COPY --chown=api:api . /app
-
+# COPY --chown=api:api . /app
+COPY ./ /app
 RUN pipenv install --deploy
-RUN chown -R api:api /app/.local && chmod -R 775 /app/.local
+# RUN chown -R api:api /app/.local && chmod -R 775 /app/.local
 
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 
