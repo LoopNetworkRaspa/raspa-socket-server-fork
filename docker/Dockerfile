@@ -31,7 +31,7 @@ USER api
 COPY --chown=api:api . /app
 
 RUN pipenv install --deploy
-RUN chmod -R 777 /app
+RUN chmod -R 755 /app/.local
 
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 
